@@ -8,9 +8,36 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar.jsx";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { User_API_Endpoint } from "../../Utils/constant.js";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { logout } from "../../../redux/authSlice.js";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const { user } = useSelector((store) => store.auth);
+   const dispatch = useDispatch();
+   const navigate = useNavigate();
+
+  const logoutHandler= async()=>{
+try {
+  const response = await axios.get(`${User_API_Endpoint}/logout`, 
+     {
+    withCredentials: true
+  }
+     );
+    if(response.data.success){
+      console.log(response.data.message);
+      dispatch(logout());
+      navigate("/", { replace: true });
+      alert("Logged out successfully");
+  };
+} catch (error) {
+  console.log(error.data.message);
+  alert(error.data.message);
+}
+
+  }
 
   return (
     <div className="bg-white flex justify-between items-center 
@@ -56,9 +83,9 @@ const Navbar = () => {
                 <Button variant="link">View Profile</Button>
               </Link>
 
-              <Link to="/">
-                <Button variant="link">Logout</Button>
-              </Link>
+             
+                <Button  onClick={logoutHandler} variant="link">Logout</Button>
+              
             </PopoverContent>
           </Popover>
         )}
@@ -88,7 +115,7 @@ const Navbar = () => {
             ) : (
               <>
                 <Link to="/profile"><Button variant="link">View Profile</Button></Link>
-                <Link to="/"><Button variant="link">Logout</Button></Link>
+               <Button   onClick={logoutHandler} variant="link">Logout</Button>
               </>
             )}
           </PopoverContent>

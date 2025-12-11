@@ -12,7 +12,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "../ui/table";
+} from "../ui/table";   
 
 const Profile = () => {
   const [open, setOpen] = React.useState(false);
@@ -99,7 +99,7 @@ const Profile = () => {
             {/* Resume */}
             <div className="mt-5">
               <h3 className="font-semibold">Resume</h3>
-              <a href="#" className="text-blue-600 break-all hover:underline">
+              <a  href={user.profile?.resume} className="text-blue-600 break-all hover:underline">
                 {user.profile?.resumeOriginalName || "No resume uploaded."}
               </a>
             </div>

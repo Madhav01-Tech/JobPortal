@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { User_API_Endpoint } from "../../Utils/constant.js";
 import { setUser } from "../../../redux/authSlice.js";
 import {
@@ -16,8 +15,6 @@ import { Button } from "@/components/ui/button";
 const UpdateProfileModal = ({ open, setOpen }) => {
   const { user } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-
   if (!user) return null;
 
   const [inputData, setInputData] = useState({
@@ -45,18 +42,18 @@ const UpdateProfileModal = ({ open, setOpen }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // 🔥 Convert skills string -> array
+    // Convert skills string -> comma separated string (backend splits it)
     const skillsArray = inputData.skills
-      .split(/[ ,]+/)
+      .split(",")
       .map((s) => s.trim())
-      .filter((s) => s !== "");
+      .filter(Boolean);
 
     const formData = new FormData();
     formData.append("fullName", inputData.fullName);
     formData.append("email", inputData.email);
     formData.append("phoneNumber", inputData.phoneNumber);
     formData.append("bio", inputData.bio);
-    formData.append("skills", JSON.stringify(skillsArray)); // IMPORTANT
+    formData.append("skills", skillsArray.join(","));
 
     if (file) formData.append("file", file);
 
@@ -151,9 +148,9 @@ const UpdateProfileModal = ({ open, setOpen }) => {
             />
           </div>
 
-          {/* File */}
+          {/* Resume */}
           <div className="flex flex-col space-y-1">
-            <label className="text-sm font-medium">Profile File</label>
+            <label className="text-sm font-medium">Resume (optional)</label>
             <input
               type="file"
               className="border rounded-md p-2 text-sm"
