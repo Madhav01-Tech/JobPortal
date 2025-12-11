@@ -1,5 +1,6 @@
 
 import {Job} from "../models/job.model.js";
+import mongoose from "mongoose";
 //admin
 export const postJob = async(req,res)=>{
     try{
@@ -34,36 +35,30 @@ export const postJob = async(req,res)=>{
 } 
 //student
 export const getAllJobs=async(req,res)=>{
-  try{
-      const Keyword = req.query.keyword || "";
-       const query = {
-        $or:[
-          {title:{$regex:Keyword,$options:"i"}},
-          {description:{$regex:Keyword,$options:"i"}},
-        ]
-       };
-       const jobs = await Job.find(query).populate({
-        path:"company"
-       }).sort({createdAt:-1})
-     
-       if(!jobs){
-        return res.status(404).json({
-          message:"Job not found",
-          success:false
-        })
-       }
-       return res.status(200).json({
-        jobs,
-        success:true
-       })
-  }catch(error){
-    console.log(error);
+  try {
+    const jobs = await Job.find({})
+      .populate({ path: "company" })
+      .sort({ createdAt: -1 });
+
+    return res.status(200).json({ jobs, success: true });
+  } catch (error) {
+    console.error("getAllJobs error:", error);
+    return res.status(500).json({ message: "Server error", success: false });
   }
 }
 //student
 export const getJobById = async(req,res)=>{
   try{
-     const jobId =  req.params.id.trim();
+     const jobId = req.params.id && String(req.params.id).trim();
+
+     // Validate ObjectId to avoid Mongoose CastError when invalid values (eg. 'get') are provided
+     if (!jobId || !mongoose.Types.ObjectId.isValid(jobId)) {
+       return res.status(400).json({
+         message: "Invalid job id",
+         success: false,
+       });
+     }
+
      const job = await Job.findById(jobId).populate({
       path:"applications"
      });
