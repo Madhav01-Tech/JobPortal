@@ -1,16 +1,22 @@
 import React from 'react'
 
-const LatestJobCards = ({ job }) => {
+const LatestJobCards = ({ job, onClick }) => {
   if (!job) return null;
 
   return (
-    <div className='p-6 rounded-xl shadow-xl hover:shadow-2xl border border-gray-300 transition cursor-pointer w-[350px]'>
+    <div
+      onClick={onClick}
+      role={onClick ? 'button' : undefined}
+      tabIndex={onClick ? 0 : undefined}
+      onKeyDown={onClick ? (e) => { if (e.key === 'Enter') onClick(); } : undefined}
+      className='p-6 rounded-xl shadow-xl hover:shadow-2xl border border-gray-300 transition cursor-pointer w-[350px]'
+    >
       <h3 className='text-2xl font-semibold'>{job.title}</h3>
       <p className='text-sm text-gray-500'>{job.description?.slice(0, 80)}...</p>
 
       <p className='mt-3 text-lg font-medium text-purple-600'>{job.company?.name || 'Unknown Company'}</p>
 
-      <p className='text-sm text-gray-500 mt-1'>{new Date(job.createdAt).toLocaleDateString()}</p>
+      <p className='text-sm text-gray-500 mt-1'>{job.createdAt ? new Date(job.createdAt).toLocaleDateString() : ''}</p>
 
       <div className='grid grid-cols-3 mt-2 font-medium'>
         <p>{job.location || 'Remote'}</p>

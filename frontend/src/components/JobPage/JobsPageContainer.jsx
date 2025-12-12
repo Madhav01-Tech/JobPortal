@@ -1,10 +1,11 @@
 import React from "react";
 import FilterCard from "./FilterCard";
 import Job from "./Job";
-
-const Jobs = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+import { useSelector } from "react-redux";
+;
 
 const JobsPageContainer = () => {
+  const { jobs } = useSelector((store) => store.jobs);
   return (
     <div className="w-full flex gap-10 px-4 md:px-10 py-10">
       
@@ -15,12 +16,12 @@ const JobsPageContainer = () => {
 
       {/* Jobs Grid */}
       <div className="w-full">
-        {Jobs.length === 0 ? (
+        {jobs.length === 0 ? (
           <div className="text-center text-3xl font-bold">No Jobs Found</div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 mt-10">
-            {Jobs.map((item, index) => (
-              <Job key={index} />
+            {jobs.map((job ,i) => (
+              <Job key={i }  job={job}/>
             ))}
           </div>
         )}

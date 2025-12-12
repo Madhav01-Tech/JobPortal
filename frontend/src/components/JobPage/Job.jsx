@@ -2,8 +2,8 @@ import React from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
-const Job = () => {
-  const JobId = 1; // Example Job ID
+const Job = ({job}) => {
+ if (!job) return null;
   const navigate = useNavigate();
   return (
     <motion.div
@@ -15,7 +15,7 @@ const Job = () => {
     >
       {/* Top Row */}
       <div className="flex justify-between text-sm text-gray-500">
-        <p>2 days ago</p>
+        <p>{job.createdAt}</p>
         <p className="cursor-pointer hover:text-blue-500">Save</p>
       </div>
 
@@ -35,23 +35,23 @@ const Job = () => {
 
       {/* Job Title */}
       <p className="mt-3 text-xl font-bold text-gray-900">
-        Job Title Here
+       {job.title}
       </p>
 
       <p className="mt-1 text-gray-700 text-sm">
-        Brief description about the job role and responsibilities...
+        {job.description?.slice(0, 100)}...
       </p>
 
       {/* Info Grid */}
       <div className="grid grid-cols-3 mt-3 text-sm font-medium gap-2">
-        <p className="text-gray-600">dj</p>
-        <p className="text-red-500">₹4553</p>
-        <p className="text-green-600">Full Time</p>
+        <p className="text-gray-600">{job.position}</p>
+        <p className="text-red-500">₹{job.salary}</p>
+        <p className="text-green-600">{job.jobType}</p>
       </div>
 
       {/* Buttons */}
       <div className="flex mt-4 gap-3">
-        <button className="w-full py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg font-semibold" onClick={()=>navigate(`/details/${JobId}`)}>
+        <button className="w-full py-2 bg-orange-500 hover:bg-orange-600 text-white rounded-lg font-semibold" onClick={()=>navigate(`/details/${job._id}`)}>
           Details
         </button>
         <button className="w-full py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-semibold">

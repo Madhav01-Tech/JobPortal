@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { setJobs } from '../../redux/jobSlice';
 
-const UseGetAllJobs = () => {
+const UseGetAllJobs = (user) => {
     const dispatch = useDispatch();
     useEffect(() => { 
         const fetchJobs = async () => {
@@ -22,7 +22,7 @@ const UseGetAllJobs = () => {
             }
         };
 
-        fetchJobs();
+        if(user){fetchJobs();}
     }, [])
         
         

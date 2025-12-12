@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import LatestJobCards from "./LatestJobCards.jsx";
 import { useSelector } from "react-redux";
-import { motion } from "framer-motion";
+
+import { useNavigate } from "react-router-dom";
 import UseGetAllJobs from "../../hooks/UseGetAllJobs.jsx";
+
 const LatestJob = () => {
+  const { user } = useSelector((store) => store.auth);
  const { jobs } = useSelector((store) => store.jobs);
-  UseGetAllJobs();
+ const navigate = useNavigate();
+ 
+ UseGetAllJobs(user);
+  
   return (
     <div className="w-full   ">
       <div className="text-3xl font-bold  ml-30 mb-8 ">
@@ -17,7 +23,7 @@ const LatestJob = () => {
         {(!jobs || jobs.length <= 0) ? (
           <span className="text-2xl font-bold">No Job Found</span>
         ) : (
-          jobs.slice(0, 6).map((job) => <LatestJobCards key={job._id} job={job} />)
+          jobs.slice(0, 6).map((job) => <LatestJobCards key={job._id} job={job} onClick={()=>navigate(`/details/${job._id}`)}/>)
         )}
       </div>
     </div>
