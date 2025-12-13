@@ -6,9 +6,7 @@ const LatestJobCards = ({ job, onClick }) => {
   return (
     <div
       onClick={onClick}
-      role={onClick ? 'button' : undefined}
-      tabIndex={onClick ? 0 : undefined}
-      onKeyDown={onClick ? (e) => { if (e.key === 'Enter') onClick(); } : undefined}
+      
       className='p-6 rounded-xl shadow-xl hover:shadow-2xl border border-gray-300 transition cursor-pointer w-[350px]'
     >
       <h3 className='text-2xl font-semibold'>{job.title}</h3>

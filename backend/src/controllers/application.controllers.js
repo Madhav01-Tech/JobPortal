@@ -1,6 +1,5 @@
 import {Application} from "../models/application.model.js";
 import {Job} from "../models/job.model.js";
-import mongoose from "mongoose";
 export const applyJob = async(req,res)=>{
     try{
       const userId = req.id;
@@ -12,20 +11,15 @@ export const applyJob = async(req,res)=>{
          })
       };
 
-          // Validate jobId to avoid Mongoose CastError
-      if (!jobId || !mongoose.Types.ObjectId.isValid(String(jobId))) {
-         return res.status(400).json({ message: "Invalid job id", success: false });
-      }
-
-          //check if the job exists
-      const job = await Job.findById(jobId);
+      //check if the job exists
+     const job = await Job.findById(jobId);
      if(!job){
         return res.status(404).json({
             message:"job not found",
             success:false
         })
-     };
-
+     }
+     
      //check if the user has already applied for the job 
      const existingApplication = await Application.findOne({job:jobId,applicant:userId});
      if(existingApplication){
@@ -35,7 +29,7 @@ export const applyJob = async(req,res)=>{
         })
      };
 
-   
+     
    //create a new apllication 
 
    const newApplication = await Application.create({
@@ -82,12 +76,6 @@ export const getAppliedJobs = async(req,res)=>{
 export const getApplicants = async(req,res)=>{
 try{
 const jobId = req.params.id;
-
-// Validate jobId to avoid Mongoose CastError
-if (!jobId || !mongoose.Types.ObjectId.isValid(String(jobId))) {
-    return res.status(400).json({ message: "Invalid job id", success: false });
-}
-
 const job = await Job.findById(jobId).populate({
     path:'applications',
     options:{sort:{createdAt:-1}},

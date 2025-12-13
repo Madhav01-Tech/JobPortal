@@ -68,14 +68,14 @@ try {
           <Popover>
             <PopoverTrigger>
               <Avatar className="cursor-pointer">
-                <AvatarImage src="https://github.com/shadcn.png" />
+                <AvatarImage src={user?.profile?.profilePhoto} />
                 <AvatarFallback>!found</AvatarFallback>
               </Avatar>
             </PopoverTrigger>
 
             <PopoverContent className="flex flex-col gap-4 items-center w-40">
               <Avatar className="cursor-pointer">
-                <AvatarImage src="https://github.com/shadcn.png" />
+                <AvatarImage  src={user?.profile?.profilePhoto} />
                 <AvatarFallback>U</AvatarFallback>
               </Avatar>
 

@@ -15,7 +15,7 @@ const Job = ({job}) => {
     >
       {/* Top Row */}
       <div className="flex justify-between text-sm text-gray-500">
-        <p>{job.createdAt}</p>
+        <p>{new Date(job.createdAt).toLocaleDateString() }</p>
         <p className="cursor-pointer hover:text-blue-500">Save</p>
       </div>
 
