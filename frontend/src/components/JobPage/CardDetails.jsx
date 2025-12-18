@@ -14,8 +14,18 @@ const CardDetails = () => {
 
   const job = jobs?.find((j) => j._id === id) || null;
 
-  const initialApplied =
-    job?.applications?.some((application) => application.applicant === user?._id) || false;
+  const initialApplied = Boolean(
+    job?.applications?.some((application) => {
+      if (!application) return false;
+      // application may be an ObjectId string, an object with `applicant`, or a populated object
+      if (typeof application === "string") return application === user?._id;
+      if (typeof application === "object") {
+        if (application.applicant) return String(application.applicant) === String(user?._id);
+        return String(application) === String(user?._id);
+      }
+      return false;
+    })
+  );
 
   const [isApplied, setIsApplied] = useState(initialApplied);
 

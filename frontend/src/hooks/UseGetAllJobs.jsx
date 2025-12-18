@@ -22,10 +22,11 @@ const UseGetAllJobs = (user) => {
             }
         };
 
-        if(user){fetchJobs();}
-    }, [])
-        
-        
-        }
+        if (user) {
+            fetchJobs();
+        } 
 
+    }, [dispatch, user]);
+        
+}
 export default UseGetAllJobs
