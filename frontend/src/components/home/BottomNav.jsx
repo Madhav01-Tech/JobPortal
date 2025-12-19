@@ -6,12 +6,12 @@ export default function BottomNav() {
     <footer className="w-full bg-white-600 text-white py-6 mt-10 border-t border-gray-300 shadow-lg">
       <div className="max-w-6xl mx-auto px-4 flex flex-col items-center gap-4">
         <div className="flex gap-6 text-2xl">
-          <a href="#" className="hover:text-pink-400 transition text-gray-900"><FaInstagram /></a>
-          <a href="#" className="hover:text-blue-400 transition  text-gray-900"><FaTwitter /></a>
-          <a href="#" className="hover:text-blue-600 transition  text-gray-900"><FaFacebook /></a>
-          <a href="#" className="hover:text-blue-500 transition  text-gray-900"><FaLinkedin /></a>
-          <a href="#" className="hover:text-red-600 transition  text-gray-900"><FaYoutube /></a>
-          <a href="#" className="hover:text-gray-400 transition  text-gray-900"><FaGithub /></a>
+          <a href="https://www.instagram.com/" className="hover:text-pink-400 transition text-gray-900"><FaInstagram /></a>
+          <a href="https://x.com/" className="hover:text-blue-400 transition  text-gray-900"><FaTwitter /></a>
+          <a href="https://facebook.com/" className="hover:text-blue-600 transition  text-gray-900"><FaFacebook /></a>
+          <a href="https://linkedin.com/" className="hover:text-blue-500 transition  text-gray-900"><FaLinkedin /></a>
+          <a href="https://youtube.com/" className="hover:text-red-600 transition  text-gray-900"><FaYoutube /></a>
+          <a href="https://github.com/" className="hover:text-gray-400 transition  text-gray-900"><FaGithub /></a>
         </div>
 
         <div className="text-center text-sm text-gray-900">
