@@ -15,7 +15,7 @@ export default function BottomNav() {
         </div>
 
         <div className="text-center text-sm text-gray-900">
-          <p className=" text-gray-900">© 2025 YourWebsiteName. All rights reserved.</p>
+          <p className=" text-gray-900">© 2025 JobPortal. All rights reserved.</p>
           <p className="mt-1  text-gray-900">Built with ❤️ to give you the best experience.</p>
         </div>
 

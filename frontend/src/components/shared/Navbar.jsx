@@ -29,6 +29,7 @@ try {
     if(response.data.success){
       console.log(response.data.message);
       dispatch(logout());
+     
       navigate("/", { replace: true });
       alert("Logged out successfully");
   };

@@ -41,7 +41,7 @@ const Login = () => {
       navigate("/");
     } catch (error) {
       console.log(error.response?.data || error.message);
-      alert(error.response?.data?.message || "Login failed!");
+      alert( "Login failed!");
     }
   };
 

@@ -10,10 +10,18 @@ const LatestJob = () => {
  const { jobs } = useSelector((store) => store.jobs);
  const navigate = useNavigate();
  
- UseGetAllJobs(user);
-  
+ const isLoading = UseGetAllJobs(user);
+
+  if (isLoading) {
+    return (
+      <div className="w-full px-10 py-8 text-center text-gray-500">
+        Loading job details...
+      </div>
+    );
+  }
+
   return (
-    <div className="w-full   ">
+    <div className="w-full ">
       <div className="text-3xl font-bold  ml-30 mb-8 ">
         <span className="text-purple-500">Latest & Top</span> Job Openings
       </div>

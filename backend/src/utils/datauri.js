@@ -13,3 +13,10 @@ const getDataUri = (file) => {
 };
 
 export default getDataUri;
+
+/* | Symbol   | Meaning        |
+| -------- | -------------- |
+| `./`     | current folder |
+| `../`    | go up 1 level  |
+| `../../` | go up 2 levels |
+*/

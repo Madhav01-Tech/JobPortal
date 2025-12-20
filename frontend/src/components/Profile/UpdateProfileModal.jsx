@@ -70,7 +70,7 @@ const UpdateProfileModal = ({ open, setOpen }) => {
       if (response.data.success) {
         alert("Profile updated successfully!");
 
-        // 🔥 UPDATE REDUX TO REFLECT NEW USER DATA
+        //  UPDATE REDUX TO REFLECT NEW USER DATA
         dispatch(setUser(response.data.user));  
 
         setOpen(false);
