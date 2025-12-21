@@ -52,10 +52,22 @@ try {
       {/* Right Section */}
       <div className="hidden sm:flex gap-4 md:gap-6 items-center">
         
+        {
+          user && user.role === "recruiter"?  (
+            <>
+        <Link to="/admin/companies"><span className="font-medium cursor-pointer">companies</span></Link>
+        <Link to="admin/job"><span className="font-medium cursor-pointer">Jobs</span></Link>
+            </>
+          ):(
+            <>
         <Link to="/"><span className="font-medium cursor-pointer">Home</span></Link>
         <Link to="/job"><span className="font-medium cursor-pointer">Jobs</span></Link>
         <Link to="/ss"><span className="font-medium cursor-pointer">Browser</span></Link>
 
+            </>
+          )
+        }
+       
         {!user ? (
           <>
             <Link to="/login">

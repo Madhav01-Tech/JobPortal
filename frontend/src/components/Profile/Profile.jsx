@@ -53,7 +53,8 @@ const Profile = () => {
           />
 
           {/* User Info */}
-          <div className="w-full">
+          <div className="w-full flex flex-col gap-1">
+            
             <h2 className="text-xl font-semibold">{user.fullName}</h2>
 
             <p className="text-gray-600 mt-2 leading-relaxed">
