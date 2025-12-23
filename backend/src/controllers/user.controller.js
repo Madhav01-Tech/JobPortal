@@ -172,3 +172,22 @@ export const updateProfile = async (req, res) => {
     return res.status(500).json({ message: "Server error", success: false });
   }
 };
+
+// ---------------------
+// GET CURRENT USER
+// ---------------------
+export const getMe = async (req, res) => {
+  try {
+    const userId = req.id; // set by isAuthenticated middleware
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found", success: false });
+    }
+
+    return res.status(200).json({ user, success: true });
+  } catch (error) {
+    console.error("Get me error:", error.message);
+    return res.status(500).json({ message: "Server error", success: false });
+  }
+};

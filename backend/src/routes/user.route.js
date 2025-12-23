@@ -1,5 +1,5 @@
 import express from "express";
-import { login, register, updateProfile, logout } from "../controllers/user.controller.js";
+import { login, register, updateProfile, logout, getMe } from "../controllers/user.controller.js";
 import isAuthenticated from "../middlewares/isAuthenticated.js"; // check folder name
 import { singleUpload } from "../middlewares/multer.js"; // check folder name
 
@@ -13,6 +13,9 @@ router.post("/login", login);
 
 // Logout user
 router.get("/logout", logout);
+
+// Get current authenticated user
+router.get("/me", isAuthenticated, getMe);
 
 // Update profile (requires authentication + optional file upload)
 router.post("/profile/update", isAuthenticated, singleUpload, updateProfile);
