@@ -9,6 +9,7 @@ import Profile from "./components/Profile/profile.jsx"
 import CardDetails from "./components/JobPage/CardDetails.jsx"
 import Companies from "./Company/Companies.jsx"
 import CreateCompanies from "./Company/CreateCompanies.jsx"
+import FillCompanyDetails from "./Company/FillCompanyDetails.jsx"
 function App() {
   return (
     <>
@@ -23,6 +24,7 @@ function App() {
     <Route path="/details/:id" element={<CardDetails/>}/>
     <Route path="/admin/companies" element={<Companies/>} />
     <Route path="/admin/companies/create" element={<CreateCompanies/>} />
+    <Route path="/admin/companies/:id" element={<FillCompanyDetails/>} />
     </Routes>
        </BrowserRouter>
     </>

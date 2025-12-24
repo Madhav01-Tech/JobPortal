@@ -3,13 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Company_API_Endpoint } from "../Utils/constant.js";
 import axios from "axios";
-
+import { useDispatch, useSelector } from "react-redux";
+import { setSingleCompany } from "../../redux/companyslice.js";
 const CreateCompanies = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [companyName, setCompanyName] = useState("");
 
   const CreateNewCompany = async () => {
-
+  
     if (!companyName || !companyName.trim()) {
     alert("Company name is required");
     return;
@@ -28,9 +30,10 @@ const CreateCompanies = () => {
       );
 
       if (response.status === 201  || response.data.success) {
-        alert("Company created successfully");
-        console.log("Company created:", response.data);
-        navigate(`/admin/companies/${response.data.company._id}`);
+      console.log("Company created:", response.data);
+      dispatch(setSingleCompany(response.data.company));
+      navigate(`/admin/companies/${response.data.company._id}`);
+     
       }
     } catch (error) {
       console.error(
