@@ -19,7 +19,7 @@ export const registerCompany = async(req,res)=>{
        };
      company= await Company.create({
         name:name,
-        userId:req.id
+        userId:req.id // user who create company
      })
 
      return res.status(201).json({
