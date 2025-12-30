@@ -8,72 +8,93 @@ import {
   TableHeader,
   TableRow,
 } from "../components/ui/table";
+import { FiEdit } from "react-icons/fi";
+import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
 import { useSelector } from "react-redux";
-import UseGetAdminJobs from "../hooks/UseGetAdminJobs";
+import useGetAllCompanies from "../hooks/UseGetAllCompanies";
+import { useNavigate } from "react-router-dom";
 
-const AdminJobsTable = ({ search }) => {
+const CompaniesTable = ({ search }) => {
   const user = useSelector((state) => state.auth.user);
+  useGetAllCompanies(user);
 
-  // fetch admin jobs
-  UseGetAdminJobs(user);
-
-  // get jobs from redux
-  const jobs = useSelector(
-    (state) => state.adminJobs.jobs
+  const companies = useSelector(
+    (state) => state.company.companies
   ) || [];
+
+  const navigate = useNavigate();
 
   const normalizedSearch = (search || "").trim().toLowerCase();
 
-  const filteredJobs =
+  const filteredCompanies =
     normalizedSearch === ""
-      ? jobs
-      : jobs.filter((job) => {
-          const title = (job.title || "").toLowerCase();
-          const location = (job.location || "").toLowerCase();
-          const type = (job.jobType || "").toLowerCase();
+      ? companies
+      : companies.filter((c) => {
+          const name = (c.name || "").toLowerCase();
+          const website = (c.website || "").toLowerCase();
+          const location = (c.location || "").toLowerCase();
 
           return (
-            title.includes(normalizedSearch) ||
-            location.includes(normalizedSearch) ||
-            type.includes(normalizedSearch)
+            name.includes(normalizedSearch) ||
+            website.includes(normalizedSearch) ||
+            location.includes(normalizedSearch)
           );
         });
 
   return (
     <div>
       <Table>
-        <TableCaption>Your jobs</TableCaption>
+        <TableCaption>Your companies</TableCaption>
 
         <TableHeader>
           <TableRow>
-            <TableHead>Title</TableHead>
-            <TableHead>Type</TableHead>
+            <TableHead>Logo</TableHead>
+            <TableHead>Name</TableHead>
+            <TableHead>Website</TableHead>
             <TableHead>Location</TableHead>
-            <TableHead>Salary</TableHead>
-            <TableHead>Experience</TableHead>
             <TableHead>Date</TableHead>
+            <TableHead>Action</TableHead>
           </TableRow>
         </TableHeader>
 
         <TableBody>
-          {filteredJobs.length === 0 ? (
+          {filteredCompanies.length === 0 ? (
             <TableRow>
               <TableCell colSpan={6} className="text-center">
-                No jobs created yet.
+                No companies created yet.
               </TableCell>
             </TableRow>
           ) : (
-            filteredJobs.map((job) => (
-              <TableRow key={job._id}>
-                <TableCell>{job.title}</TableCell>
-                <TableCell>{job.jobType || "—"}</TableCell>
-                <TableCell>{job.location || "—"}</TableCell>
-                <TableCell>{job.salary || "—"}</TableCell>
-                <TableCell>{job.experience || "—"}</TableCell>
+            filteredCompanies.map((company) => (
+              <TableRow key={company._id || company.id}>
                 <TableCell>
-                  {job.createdAt
-                    ? new Date(job.createdAt).toLocaleDateString()
+                  <Avatar>
+                    <AvatarImage
+                      className="w-12 h-12 rounded-full object-cover"
+                      src={company.logo || ""}
+                      alt={company.name || "company logo"}
+                    />
+                  </Avatar>
+                </TableCell>
+
+                <TableCell>{company.name}</TableCell>
+                <TableCell>{company.website || "—"}</TableCell>
+                <TableCell>{company.location || "—"}</TableCell>
+                <TableCell>
+                  {company.createdAt
+                    ? new Date(company.createdAt).toLocaleDateString()
                     : "—"}
+                </TableCell>
+
+                <TableCell>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      navigate(`/admin/companies/${company._id}`)
+                    }
+                  >
+                    <FiEdit size={20} />
+                  </button>
                 </TableCell>
               </TableRow>
             ))
@@ -84,4 +105,4 @@ const AdminJobsTable = ({ search }) => {
   );
 };
 
-export default AdminJobsTable;
+export default CompaniesTable;
