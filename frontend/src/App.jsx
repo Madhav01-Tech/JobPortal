@@ -7,9 +7,12 @@ import { HomepagesContainer } from "./components/home/homepagesContainer.jsx"
 import JobsPageContainer from "./components/JobPage/JobsPageContainer.jsx"
 import Profile from "./components/Profile/profile.jsx"
 import CardDetails from "./components/JobPage/CardDetails.jsx"
-import Companies from "./Company/Companies.jsx"
-import CreateCompanies from "./Company/CreateCompanies.jsx"
-import FillCompanyDetails from "./Company/FillCompanyDetails.jsx"
+import Companies from "./Admin/Companies.jsx"
+import CreateCompanies from "./Admin/CreateCompanies.jsx"
+import FillCompanyDetails from "./Admin/FillCompanyDetails.jsx"
+import AdminJobs from "./Admin/AdminJobs.jsx"
+import CreateJobs from "./Admin/CreateJobs.jsx"
+
 function App() {
   return (
     <>
@@ -25,7 +28,10 @@ function App() {
     <Route path="/admin/companies" element={<Companies/>} />
     <Route path="/admin/companies/create" element={<CreateCompanies/>} />
     <Route path="/admin/companies/:id" element={<FillCompanyDetails/>} />
+    <Route path="/admin/job" element={<AdminJobs/>} />
+    <Route path="/admin/createJob" element={<CreateJobs/>} />
     </Routes>
+    
        </BrowserRouter>
     </>
   )

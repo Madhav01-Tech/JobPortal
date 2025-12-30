@@ -52,6 +52,7 @@ const FillCompanyDetails = () => {
       );
 
       dispatch(setSingleCompany(response.data.company));
+     
       alert("Company details updated successfully");
       navigate("/admin/companies");
       console.log(response.data);

@@ -12,7 +12,7 @@ const CardDetails = () => {
   const { id: jobId } = useParams();
   const currentUser = useSelector((store) => store.auth?.user);
  const navigate = useNavigate();
-  const { user } = useSelector((store) => store.auth); // for authenticate if user not logged in navigateto login page
+  const { user } = useSelector((store) => store.auth); // for authenticate if user not logged in navigatete login page
   const [job, setJob] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isApplying, setIsApplying] = useState(false);
