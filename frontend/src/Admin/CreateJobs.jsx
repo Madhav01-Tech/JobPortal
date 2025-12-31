@@ -30,7 +30,7 @@ const CreateJobs = () => {
     companyId: "",
   });
 
-  // 🔹 fetch companies
+  
   const user = useSelector((state) => state.auth.user);
   useGetAllCompanies(user);
 

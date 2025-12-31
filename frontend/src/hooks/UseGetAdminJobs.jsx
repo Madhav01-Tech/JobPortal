@@ -1,7 +1,7 @@
 import { Jobs_API_Endpoint } from "@/Utils/constant";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { setAdminJobs } from "../../redux/AdminJobSlice";
+import { setAdminJobs } from "../../redux/AdminJobSlice.js";
 import { useDispatch } from "react-redux";
 
 const UseGetAdminJobs = (user) => {

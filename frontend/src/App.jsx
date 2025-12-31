@@ -12,6 +12,7 @@ import CreateCompanies from "./Admin/CreateCompanies.jsx"
 import FillCompanyDetails from "./Admin/FillCompanyDetails.jsx"
 import AdminJobs from "./Admin/AdminJobs.jsx"
 import CreateJobs from "./Admin/CreateJobs.jsx"
+import Applicants from "./Admin/Applicants.jsx"
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
     <Route path="/admin/companies/:id" element={<FillCompanyDetails/>} />
     <Route path="/admin/job" element={<AdminJobs/>} />
     <Route path="/admin/createJob" element={<CreateJobs/>} />
+    <Route path="/admin/jobs/:id/applicants" element={<Applicants/>} />
     </Routes>
     
        </BrowserRouter>

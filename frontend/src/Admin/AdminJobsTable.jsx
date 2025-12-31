@@ -10,17 +10,16 @@ import {
   TableRow,
 } from "../components/ui/table";
 import { useSelector } from "react-redux";
+import { Eye } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const AdminJobsTable = ({ search }) => {
   const user = useSelector((state) => state.auth.user);
-
- 
+ const navigate=useNavigate();
   const { jobs } = useSelector((state) => state.adminJobs);
 
-  
   const loading = UseGetAdminJobs(user);
 
- 
   const filteredJobs = jobs.filter((job) =>
     job.title?.toLowerCase().includes(search?.toLowerCase() || "")
   );
@@ -37,7 +36,7 @@ const AdminJobsTable = ({ search }) => {
             <TableHead>Salary</TableHead>
             <TableHead>Location</TableHead>
             <TableHead>Position</TableHead>
-            <TableHead>Experience</TableHead>
+            <TableHead>Action</TableHead>
           </TableRow>
         </TableHeader>
 
@@ -62,7 +61,9 @@ const AdminJobsTable = ({ search }) => {
                 <TableCell>{job.salary}</TableCell>
                 <TableCell>{job.location}</TableCell>
                 <TableCell>{job.position}</TableCell>
-                <TableCell>{job.experienceLevel}</TableCell>
+                <TableCell onClick={()=>navigate(`/admin/jobs/${job._id}/applicants`)}>
+                  <Eye size={18} />
+                </TableCell>
               </TableRow>
             ))
           )}

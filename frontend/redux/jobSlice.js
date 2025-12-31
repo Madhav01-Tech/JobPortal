@@ -5,7 +5,7 @@ const jobSlice = createSlice({
 
   initialState: {
     jobs: [],
-    singleJob: null,   // 🔥 Added this
+    singleJob: null,   
   },
 
   reducers: {
@@ -13,7 +13,7 @@ const jobSlice = createSlice({
       state.jobs = action.payload;
     },
 
-    setSingleJob(state, action) {   // 🔥 Added this
+    setSingleJob(state, action) {   
       state.singleJob = action.payload;
     },
   },
