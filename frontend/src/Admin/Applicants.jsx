@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import ApplicantsTable from "./ApplicantsTable.jsx";
 import { Application_API_Endpoint } from "@/Utils/constant.js";
 import { useParams } from "react-router-dom";
@@ -7,30 +7,29 @@ import { useDispatch, useSelector } from "react-redux";
 import { setApplicants } from "../../redux/ApplicantsSlice.js";
 
 const Applicants = () => {
-  const params = useParams();
+  const { id } = useParams();
   const dispatch = useDispatch();
 
   const applicants = useSelector((state) => state.applicants.applicants);
 
-  useEffect(() => {
-    const fetchApplicants = async () => {
-      try {
-        const res = await axios.get(
-          `${Application_API_Endpoint}/${params.id}/applicants`,
-          { withCredentials: true }
-        );
+  const fetchApplicants = useCallback(async () => {
+    try {
+      const res = await axios.get(
+        `${Application_API_Endpoint}/${id}/applicants`,
+        { withCredentials: true }
+      );
 
-        if (res.data.success) {
-          dispatch(setApplicants(res.data.job.applications));
-          console.log(res.data.job.applications)
-        }
-      } catch (error) {
-        console.error(error);
+      if (res.data.success) {
+        dispatch(setApplicants(res.data.job.applications));
       }
-    };
+    } catch (error) {
+      console.error(error.response?.data?.message || error.message);
+    }
+  }, [id, dispatch]);
 
+  useEffect(() => {
     fetchApplicants();
-  }, [params.id, dispatch]);
+  }, [fetchApplicants]);
 
   return (
     <div className="px-4 md:px-8 lg:px-12 py-10">
@@ -38,7 +37,10 @@ const Applicants = () => {
         Applicants ({applicants.length})
       </h1>
 
-      <ApplicantsTable applicants={applicants} />
+      <ApplicantsTable
+        applicants={applicants}
+        refetchApplicants={fetchApplicants}
+      />
     </div>
   );
 };

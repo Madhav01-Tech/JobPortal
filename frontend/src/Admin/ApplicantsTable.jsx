@@ -16,14 +16,38 @@ import {
 } from "@/components/ui/popover";
 
 import { MoreHorizontal } from "lucide-react";
+import axios from "axios";
+import { Application_API_Endpoint } from "@/Utils/constant";
 
-const ApplicantsTable = ({ applicants = [] }) => {
+const shortListingStatus = ["Accepted", "Rejected"];
+
+const ApplicantsTable = ({ applicants = [], refetchApplicants }) => {
+
+  const statusHandler = async (status, id) => {
+    try {
+      const res = await axios.post(
+        `${Application_API_Endpoint}/status/${id}/update`,
+        { status },
+        { withCredentials: true }
+      );
+
+      alert(res.data.message);
+
+      // optional: refresh table after update
+      if (refetchApplicants) {
+        refetchApplicants();
+      }
+
+    } catch (error) {
+      console.error(error.response?.data?.message || error.message);
+    }
+  };
+
   return (
     <div className="mt-4">
       <Table>
         <TableCaption>Applicants List</TableCaption>
 
-        {/* HEADER */}
         <TableHeader>
           <TableRow>
             <TableHead>Full Name</TableHead>
@@ -31,33 +55,32 @@ const ApplicantsTable = ({ applicants = [] }) => {
             <TableHead>Contact</TableHead>
             <TableHead>Resume</TableHead>
             <TableHead>Date</TableHead>
+            <TableHead>Status</TableHead>
             <TableHead className="text-right">Action</TableHead>
           </TableRow>
         </TableHeader>
 
-        {/* BODY (THIS WAS MISSING) */}
         <TableBody>
           {applicants.length === 0 ? (
             <TableRow>
-              <TableCell colSpan={6} className="text-center">
+              <TableCell colSpan={7} className="text-center">
                 No applicants found
               </TableCell>
             </TableRow>
           ) : (
             applicants.map((app) => (
               <TableRow key={app._id}>
-                <TableCell>{app.applicant?.
-fullName}</TableCell>
+                <TableCell>{app.applicant?.fullName}</TableCell>
                 <TableCell>{app.applicant?.email}</TableCell>
                 <TableCell>{app.applicant?.phoneNumber}</TableCell>
 
                 <TableCell>
-                  {app.applicant?.resume ? (
+                  {app.applicant?.profile?.resume ? (
                     <a
-                      href={app.applicant.resume}
+                      href={app.applicant.profile.resume}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-blue-600 underline"
+                      className="text-blue-600 hover:underline"
                     >
                       View
                     </a>
@@ -70,6 +93,10 @@ fullName}</TableCell>
                   {new Date(app.createdAt).toLocaleDateString()}
                 </TableCell>
 
+                <TableCell className="capitalize">
+                  {app.status || "pending"}
+                </TableCell>
+
                 <TableCell className="text-right">
                   <Popover>
                     <PopoverTrigger asChild>
@@ -77,14 +104,15 @@ fullName}</TableCell>
                     </PopoverTrigger>
 
                     <PopoverContent className="w-32">
-                      <div className="flex flex-col gap-2">
-                        <span className="cursor-pointer hover:text-green-600">
-                          Accept
-                        </span>
-                        <span className="cursor-pointer hover:text-red-600">
-                          Reject
-                        </span>
-                      </div>
+                      {shortListingStatus.map((status) => (
+                        <div
+                          key={status}
+                          onClick={() => statusHandler(status, app._id)}
+                          className="cursor-pointer my-2 hover:text-blue-600"
+                        >
+                          {status}
+                        </div>
+                      ))}
                     </PopoverContent>
                   </Popover>
                 </TableCell>
