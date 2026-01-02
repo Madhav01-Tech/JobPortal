@@ -101,34 +101,43 @@ return res.status(200).json({
 }
 };
 
-export const updateStatus = async(req,res)=>{
-    try{
-    const {status} = req.body;
+
+
+export const updateStatus = async (req, res) => {
+  try {
+    const { status } = req.body;
     const applicationId = req.params.id;
-    if(!status){
-        return res.status(400).json({
-            message:"status is required",
-            success:false
-        })
-    };
-    //find the applications by application id 
-   const application = await Application.findOne({_id:applicationId});
-   if(!application){
-    return res.status(404).json({
-        message:"Application not found",
-        success:false
-    })
-   };
 
-   //update the status
-   application.status = status.toLowerCase();
-   await application.save();
-   return res.status(200).json({
-    message:"update successfully",
-    success:true
-   });
-
-    }catch(error){
-        console.log(error);
+    if (!status) {
+      return res.status(400).json({
+        message: "Status is required",
+        success: false,
+      });
     }
-}
+
+    const application = await Application.findById(applicationId);
+
+    if (!application) {
+      return res.status(404).json({
+        message: "Application not found",
+        success: false,
+      });
+    }  
+
+    application.status = status.toLowerCase();
+    await application.save();
+
+    return res.status(200).json({
+      message: "Status updated successfully",
+      success: true,
+      status: application.status,
+    });
+
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      message: "Server error",
+      success: false,
+    });
+  }
+};

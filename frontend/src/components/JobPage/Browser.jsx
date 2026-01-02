@@ -25,7 +25,7 @@ const Browse = () => {
       <div className="max-w-6xl mx-auto my-10">
         <h1 className="font-bold text-xl my-10">
           Search Result ({displayJobs.length})
-        </h1>on  
+        </h1>
 
         {displayJobs.length === 0 ? (
           <p className="text-center text-gray-500 text-2xl ">No jobs found </p>

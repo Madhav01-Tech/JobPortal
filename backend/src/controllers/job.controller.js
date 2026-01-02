@@ -46,6 +46,35 @@ export const getAllJobs=async(req,res)=>{
     return res.status(500).json({ message: "Server error", success: false });
   }
 }
+
+// student - search jobs
+export const searchJobs = async (req, res) => {
+  try {
+    const keyword = req.query.keyword || "";
+console.log(req.query.keyword);
+
+    const jobs = await Job.find({
+      $or: [
+    { title: { $regex: keyword, $options: "i" } },
+    { location: { $regex: keyword, $options: "i" } },
+  ],
+    })
+      .populate("company")
+      .sort({ createdAt: -1 });
+
+    return res.status(200).json({
+      jobs,
+      success: true,
+    });
+  } catch (error) {
+    console.log("searchJobs error:", error);
+    return res.status(500).json({
+      message: "Server error",
+      success: false,
+    });
+  }
+};
+
 //student
 export const getJobById = async(req,res)=>{
   try{

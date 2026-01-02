@@ -3,18 +3,23 @@ import {
   applyJob,
   getApplicants,
   getAppliedJobs,
-  updateStatus
+  updateStatus,
 } from "../controllers/application.controllers.js";
 
 import isAuthenticated from "../middlewares/isAuthenticated.js";
 
 const router = express.Router();
 
-// FIXED: Change GET → POST
-router.route("/apply/:id").post(isAuthenticated, applyJob);// for applying to a job
+// Apply for a job
+router.post("/apply/:id", isAuthenticated, applyJob);
 
-router.route("/get").get(isAuthenticated, getAppliedJobs); // for user dashboard
-router.route("/:id/applicants").get(isAuthenticated, getApplicants);// for recruiter dashboard 
-router.route("/status/:id/update").post(isAuthenticated, updateStatus);// for recruiter to update application status
+// User dashboard – applied jobs
+router.get("/get", isAuthenticated, getAppliedJobs);
+
+// Recruiter dashboard – applicants
+router.get("/:id/applicants", isAuthenticated, getApplicants);
+
+// Update application status (ACCEPT / REJECT)
+router.post("/status/:id/update", isAuthenticated, updateStatus);
 
 export default router;
