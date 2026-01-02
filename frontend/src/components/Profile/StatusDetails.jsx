@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 
 const StatusDetails = () => {
   const { id } = useParams();
-  UseGetAppliedJobs()
+  UseGetAppliedJobs();
 
   const { user } = useSelector((state) => state.auth);
   const appliedJobs = useSelector((state) => state.jobs.appliedJobs);
@@ -27,8 +27,7 @@ const StatusDetails = () => {
       </div>
     );
   }
-
-  // ================= ACCEPTED =================
+  
   if (application.status === "accepted") {
     return (
       <div className="min-h-[70vh] flex flex-col items-center justify-center text-center">

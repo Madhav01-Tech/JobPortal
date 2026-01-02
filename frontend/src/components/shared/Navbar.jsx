@@ -62,7 +62,7 @@ try {
             <>
         <Link to="/"><span className="font-medium cursor-pointer">Home</span></Link>
         <Link to="/job"><span className="font-medium cursor-pointer">Jobs</span></Link>
-        <Link to="/ss"><span className="font-medium cursor-pointer">Browser</span></Link>
+        
 
             </>
           )

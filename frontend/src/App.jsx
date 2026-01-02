@@ -1,7 +1,7 @@
 import Navbar from "./components/shared/Navbar.jsx";
 import { Routes, Route } from "react-router";
 import { BrowserRouter } from "react-router-dom";
-
+import Browser from "./components/JobPage/Browser.jsx"
 import Login from "./components/auth/login.jsx";
 import SignUp from "./components/auth/SignUp.jsx";
 import { HomepagesContainer } from "./components/home/homepagesContainer.jsx";
@@ -27,6 +27,7 @@ function App() {
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/" element={<HomepagesContainer />} />
         <Route path="/job" element={<JobsPageContainer />} />
+        <Route path="/browser" element={ <Browser/>} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/details/:id" element={<CardDetails />} />
 
