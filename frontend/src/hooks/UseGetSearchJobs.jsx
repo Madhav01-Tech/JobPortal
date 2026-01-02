@@ -8,11 +8,16 @@ const UseGetSearchJobs = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
 
-  
-  const searchQuery = useSelector((state) => state.jobs.searchQuery);
+  // ✅ Correct selector
+  const searchQuery = useSelector(
+    (state) => state.jobs.searchQuery
+  );
 
   useEffect(() => {
-    if (!searchQuery) return;
+    if (!searchQuery) {
+      dispatch(setSearchedJobs([]));
+      return;
+    }
 
     const fetchJobs = async () => {
       try {
