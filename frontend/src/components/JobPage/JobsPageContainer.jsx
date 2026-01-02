@@ -1,33 +1,49 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+
 import FilterCard from "./FilterCard";
 import Job from "./Job";
 import { useSelector } from "react-redux";
-;
+const jobsArray = [1, 2, 3, 4, 5, 6, 7, 8];
 
-const JobsPageContainer = () => {
-  const { jobs } = useSelector((store) => store.jobs);
+const Jobs = () => {
+  const {jobs,searchQuery} = useSelector(store=>store.jobs);
+  const [filterJobs,setFilterJobs] = useState(jobs);
+  useEffect(()=>{
+    if(searchQuery){
+  const filteredJobs = jobs.filter((job)=>{
+    return job.title.toLowerCase().includes(searchQuery.toLowerCase()) || job.description.toLowerCase().includes(searchQuery.toLowerCase()) || job.location.toLowerCase().includes(searchQuery.toLowerCase()) 
+  })
+  setFilterJobs(filteredJobs)
+    }else{
+      setFilterJobs(jobs)
+    }
+  },[jobs,searchQuery]);
   return (
-    <div className="w-full flex gap-10 px-4 md:px-10 py-10">
-      
-      
-      <div className="hidden md:block w-1/4">
-        <FilterCard />
-      </div>
-
-      {/* Jobs Grid */}
-      <div className="w-full">
-        {jobs.length === 0 ? (
-          <div className="text-center text-3xl font-bold">No Jobs Found</div>
+    <div>
+    
+      <div className="max-w-6xl mx-auto mt-5">
+        <div className="flex gap-5">
+          <div className="w-20%">
+            <FilterCard />
+          </div>
+        
+        {filterJobs.length <= 0 ? (
+          <span>Job Not Found</span>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 mt-10">
-            {jobs.map((job ,i) => (
-              <Job key={i }  job={job}/>
-            ))}
+          <div className="flex-1 h-[88vh] overflow-y-auto pb-5">
+            <div className="grid grid-cols-3 gap-4">
+              {filterJobs.map((job) => (
+                <div key={job?._id}>
+                  <Job job={job} />
+                </div>
+              ))}
+            </div>
           </div>
         )}
       </div>
     </div>
+    </div>
   );
 };
 
-export default JobsPageContainer;
+export default Jobs;

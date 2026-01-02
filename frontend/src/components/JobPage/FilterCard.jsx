@@ -26,6 +26,7 @@ const FilterCard = () => {
   const changeHandler = (value) => {
     setSelectedValue(value);
     dispatch(setSearchQuery(selectedValue));
+    console.log(selectedValue);
   };
 
   useEffect(() => {
