@@ -2,7 +2,7 @@ import Navbar from "./components/shared/Navbar.jsx";
 import { Routes, Route } from "react-router";
 import { BrowserRouter } from "react-router-dom";
 import Browser from "./components/JobPage/Browser.jsx"
-import Login from "./components/auth/login.jsx";
+import Login from "./components/auth/Login.jsx";
 import SignUp from "./components/auth/SignUp.jsx";
 import { HomepagesContainer } from "./components/home/homepagesContainer.jsx";
 import JobsPageContainer from "./components/JobPage/JobsPageContainer.jsx";
