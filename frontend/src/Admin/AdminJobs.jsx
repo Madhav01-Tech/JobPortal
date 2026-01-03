@@ -1,5 +1,5 @@
 
-import { Button } from '../ui/button.jsx';
+import { Button } from '../components/ui/button.jsx';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import AdminJobsTable from './AdminJobsTable';
