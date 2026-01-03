@@ -9,8 +9,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogDescription,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
+} from "../../components/ui/dialog.jsx";
+import { Button } from "../../components/ui/button.jsx";
 
 const UpdateProfileModal = ({ open, setOpen }) => {
   const { user } = useSelector((store) => store.auth);
