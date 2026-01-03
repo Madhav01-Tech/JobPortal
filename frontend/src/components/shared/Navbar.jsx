@@ -1,11 +1,11 @@
 import React from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "../ui/button.jsx";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover.jsx";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar.jsx";
+} from "../ui/popover.jsx"
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar.jsx";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { User_API_Endpoint } from "../../Utils/constant.js";
