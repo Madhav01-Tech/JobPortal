@@ -1,29 +1,30 @@
 {
-  "name": "jobportal-1",
+  "name": "backend",
   "version": "1.0.0",
+  "description": "hello",
+  "main": "index.js",
   "type": "module",
-  "main": "backend/src/index.js",
   "scripts": {
-    "dev": "nodemon",
-
-    "start": "node ./backend/src/index.js",
-
-    "build": "npm install --prefix frontend && npm run build --prefix frontend"
+    "dev": "nodemon backend/index.js",
+    "build":"npm install && npm install --prefix frontend && npm run build --prefix frontend",
+    "start":"nodemon backend/index.js"
+   
+    
   },
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "bcrypt": "^6.0.0",
-    "bcryptjs": "^3.0.3",
-    "cloudinary": "^2.8.0",
-    "cookie-parser": "^1.4.7",
+    "axios": "^1.7.4",
+    "bcryptjs": "^2.4.3",
+    "cloudinary": "^2.4.0",
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "datauri": "^4.1.0",
-    "dotenv": "^17.2.3",
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.19.3",
-    "multer": "^2.0.2"
-  },
-  "devDependencies": {
-    "nodemon": "^3.1.11"
+    "mongoose": "^8.5.1",
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^3.1.9"
   }
 }
