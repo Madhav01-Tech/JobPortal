@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setAppliedJobs } from "../../redux/jobSlice.js";
-import { Application_API_Endpoint } from "@/Utils/constant.js";
+import { Application_API_Endpoint } from "../Utils/constant.js";
 
 const UseGetAppliedJobs = () => {
   const [loading, setLoading] = useState(false);

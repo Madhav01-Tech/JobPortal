@@ -1,4 +1,4 @@
-import { Jobs_API_Endpoint } from "@/Utils/constant";
+import { Jobs_API_Endpoint } from "../Utils/constant.js";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { setAdminJobs } from "../../redux/AdminJobSlice.js";
