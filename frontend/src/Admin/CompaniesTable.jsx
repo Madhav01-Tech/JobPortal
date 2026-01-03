@@ -9,7 +9,7 @@ import {
   TableRow,
 } from "../components/ui/table";
 import { FiEdit } from "react-icons/fi";
-import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
+import { Avatar, AvatarImage } from "../components/ui/avatar.jsx";
 import { useSelector } from "react-redux";
 import useGetAllCompanies from "../hooks/UseGetAllCompanies";
 import { useNavigate } from "react-router-dom";

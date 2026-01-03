@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback } from "react";
 import ApplicantsTable from "./ApplicantsTable.jsx";
-import { Application_API_Endpoint } from "@/Utils/constant.js";
+import { Application_API_Endpoint } from "../Utils/constant.js";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";

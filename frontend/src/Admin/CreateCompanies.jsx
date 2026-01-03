@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { Company_API_Endpoint } from "../Utils/constant.js";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setSingleCompany } from "../../redux/companyslice.js";
 
 const CreateCompanies = () => {

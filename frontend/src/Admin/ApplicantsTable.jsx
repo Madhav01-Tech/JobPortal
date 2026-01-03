@@ -7,17 +7,17 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "../../src/components/ui/table.jsx";
 
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from "../../src/components/ui/popover.jsx";
 
 import { MoreHorizontal } from "lucide-react";
 import axios from "axios";
-import { Application_API_Endpoint } from "@/Utils/constant";
+import { Application_API_Endpoint } from "../Utils/constant.js";
 
 const shortListingStatus = ["Accepted", "Rejected"];
 
