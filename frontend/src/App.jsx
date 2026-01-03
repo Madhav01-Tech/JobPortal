@@ -1,6 +1,6 @@
 import Navbar from "./components/shared/Navbar.jsx";
 import { Routes, Route } from "react-router-dom";
-import '/App.css'
+
 import { BrowserRouter } from "react-router-dom";
 
 import Browser from "./components/JobPage/Browser.jsx";
