@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
-import { Label } from "../ui/label.jsx";
+import { Label } from "../ui/label";
 import { useDispatch } from "react-redux";
 import { setSearchQuery } from "../../../redux/jobSlice";
 
@@ -10,12 +10,12 @@ const filterData = [
     array: ["Delhi NCR", "Noida", "Pune", "Mumbai"],
   },
   {
-    filterType: "Industry",
-    array: ["Frontend Developer", "Backend Developer", "FullStack Developer"],
-  },
-  {
     filterType: "Salary",
-    array: ["0-40k", "40k-1lakh", "1lakh to 5 lakh"],
+    array: [
+      { label: "0-20k", min: 0, max: 20000 },
+      { label: "20k-50k", min: 20000, max: 50000 },
+      { label: "50k to 1-lakh", min: 50000, max: 100000 },
+    ],
   },
 ];
 
@@ -25,15 +25,8 @@ const FilterCard = () => {
 
   const changeHandler = (value) => {
     setSelectedValue(value);
-    dispatch(setSearchQuery(selectedValue));
-    console.log(selectedValue);
+    dispatch(setSearchQuery(value)); // ✅ correct dispatch
   };
-
-  useEffect(() => {
-    if (selectedValue) {
-      dispatch(setSearchQuery(selectedValue));
-    }
-  }, [selectedValue, dispatch]);
 
   return (
     <div className="w-full bg-white p-3 rounded-md">
@@ -48,14 +41,24 @@ const FilterCard = () => {
             </h1>
 
             {data.array.map((item, idx) => {
-              const itemId = `id-${index}-${idx}`;
+              const id = `id-${index}-${idx}`;
+
+              const value =
+                data.filterType === "Salary"
+                  ? JSON.stringify(item)
+                  : item;
+
               return (
                 <div
-                  key={itemId}
-                  className="flex items-center space-x-2 my-2"
+                  key={id}
+                  className="flex items-center space-x-2 mt-3"
                 >
-                  <RadioGroupItem value={item} id={itemId} />
-                  <Label htmlFor={itemId}>{item}</Label>
+                  <RadioGroupItem value={value} id={id} />
+                  <Label htmlFor={id} className="text-lg cursor-pointer">
+                    {data.filterType === "Salary"
+                      ? item.label
+                      : item}
+                  </Label>
                 </div>
               );
             })}
