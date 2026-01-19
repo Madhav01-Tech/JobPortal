@@ -118,7 +118,7 @@ try {
           <PopoverContent className="flex flex-col gap-4 w-48">
             <Link to="/"><span className="font-medium cursor-pointer">Home</span></Link>
             <Link to="/job"><span className="font-medium cursor-pointer">Jobs</span></Link>
-            <Link to="/ss"><span className="font-medium cursor-pointer">Browser</span></Link>
+            
 
             {!user ? (
               <>

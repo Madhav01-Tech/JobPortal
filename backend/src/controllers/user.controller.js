@@ -83,8 +83,8 @@ export const login = async (req, res) => {
     return res
       .cookie("token", token, {
         httpOnly: true,
-        secure: false, // false for localhost
-        sameSite: "lax",
+        secure: true, // false for localhost
+        sameSite: "none",
         maxAge: 24 * 60 * 60 * 1000,
         path: "/",
       })
@@ -102,8 +102,8 @@ export const login = async (req, res) => {
 export const logout = async (req, res) => {
   res.cookie("token", "", {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",   // must match login cookie
+    secure: true, // false for localhost
+    sameSite: "none",   // must match login cookie
     expires: new Date(0), // best way to delete
     path: "/",
   });

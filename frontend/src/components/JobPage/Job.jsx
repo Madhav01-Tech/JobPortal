@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
 const Job = ({job}) => {
+  
  if (!job) return null;
   const navigate = useNavigate();
   return (
@@ -28,7 +29,7 @@ const Job = ({job}) => {
         />
 
         <div className="flex flex-col ml-3">
-          <p className="font-semibold">Company Name</p>
+          <p className="font-semibold"></p>
           <p className="text-gray-600 text-sm">India</p>
         </div>
       </div>
