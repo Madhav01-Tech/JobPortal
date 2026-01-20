@@ -25,7 +25,7 @@ const Home = () => {
   };
 
   return (
-    <div className="w-full h-[80vh] bg-white py-20 flex flex-col items-center text-center px-4">
+    <div className="w-full h-[65vh] bg-white py-20 flex flex-col items-center text-center px-4">
 
       {/* Top Badge */}
       <motion.div

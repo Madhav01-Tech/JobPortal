@@ -18,7 +18,9 @@ import AdminJobs from "./Admin/AdminJobs.jsx";
 import CreateJobs from "./Admin/CreateJobs.jsx";
 import Applicants from "./Admin/Applicants.jsx";
 import StatusDetails from "./components/Profile/StatusDetails.jsx";
-
+import About from "../src/terms&conditions/About.jsx";
+import Terms from "../src/terms&conditions/Terms.jsx";
+import Contact from "./terms&conditions/Contact.jsx";
 function App() {
   return (
     <BrowserRouter>
@@ -43,6 +45,11 @@ function App() {
 
         {/* Status */}
         <Route path="/status/details/:id" element={<StatusDetails />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/contact" element={<Contact />} />
+
+
       </Routes>
     </BrowserRouter>
   );
