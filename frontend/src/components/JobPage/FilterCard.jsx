@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { Label } from "../ui/label";
 import { useDispatch } from "react-redux";
@@ -17,15 +17,17 @@ const filterData = [
       { label: "50k to 1-lakh", min: 50000, max: 100000 },
     ],
   },
+  {
+    filterType: "Job Type",
+    array: ["Remote", "Full Time", "Part Time"],
+  },
 ];
 
 const FilterCard = () => {
-  const [selectedValue, setSelectedValue] = useState("");
   const dispatch = useDispatch();
 
   const changeHandler = (value) => {
-    setSelectedValue(value);
-    dispatch(setSearchQuery(value)); // ✅ correct dispatch
+    dispatch(setSearchQuery(value));
   };
 
   return (
@@ -33,13 +35,13 @@ const FilterCard = () => {
       <h1 className="font-bold text-lg">Filter Jobs</h1>
       <hr className="mt-3" />
 
-      <RadioGroup value={selectedValue} onValueChange={changeHandler}>
-        {filterData.map((data, index) => (
-          <div key={data.filterType}>
-            <h1 className="font-bold text-lg mt-1">
-              {data.filterType}
-            </h1>
+      {filterData.map((data, index) => (
+        <div key={data.filterType}>
+          <h1 className="font-bold text-lg mt-3">
+            {data.filterType}
+          </h1>
 
+          <RadioGroup onValueChange={changeHandler}>
             {data.array.map((item, idx) => {
               const id = `id-${index}-${idx}`;
 
@@ -62,9 +64,9 @@ const FilterCard = () => {
                 </div>
               );
             })}
-          </div>
-        ))}
-      </RadioGroup>
+          </RadioGroup>
+        </div>
+      ))}
     </div>
   );
 };

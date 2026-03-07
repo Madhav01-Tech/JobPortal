@@ -76,7 +76,7 @@ export const login = async (req, res) => {
       return res.status(400).json({ message: "Invalid credentials", success: false });
 
     if (role !== user.role)
-      return res.status(400).json({ message: "Role mismatch", success: false });
+      return res.status(400).json({ message: "Invalid credentials", success: false });
 
     const token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY, { expiresIn: "1d" });
 

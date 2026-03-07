@@ -33,7 +33,7 @@ export const registerCompany = async(req,res)=>{
     }
 }
 
-export const getCompany = async(req,res)=>{
+export const getCompany = async(req,res)=>{ 
     try{
          const userId = req.id;
          const companies = await Company.find({userId});

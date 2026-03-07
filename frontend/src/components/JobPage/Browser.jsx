@@ -1,14 +1,24 @@
 import React, { useEffect } from "react";
 import Job from "./Job.jsx";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
 import UseGetSearchJobs from "../../hooks/UseGetSearchJobs.jsx";
 import { setSearchQuery } from "../../../redux/jobSlice.js";
 
 const Browse = () => {
   const dispatch = useDispatch();
+  const { query } = useParams();
 
   UseGetSearchJobs();
+
+  useEffect(() => {
+    if (query) {
+      dispatch(setSearchQuery(query));
+    } else {
+      dispatch(setSearchQuery(""));
+    }
+  }, [query, dispatch]);
 
   const { searchedJobs } = useSelector((state) => state.jobs);
 

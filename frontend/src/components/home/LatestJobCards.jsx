@@ -7,10 +7,12 @@ const LatestJobCards = ({ job, onClick }) => {
     <div
       onClick={onClick}
       
-      className='p-6 rounded-xl shadow-xl hover:shadow-2xl border border-gray-300 transition cursor-pointer w-[350px]'
+      className='p-5 rounded-xl shadow-xl hover:shadow-2xl border border-gray-300 transition cursor-pointer w-[350px]'
     >
       <h3 className='text-2xl font-semibold'>{job.title}</h3>
-      <p className='text-sm text-gray-500'>{job.description?.slice(0, 80)}...</p>
+      <p className="text-[14px] text-gray-600 leading-relaxed mt-2 font-normal tracking-wide">
+  {job.description?.slice(0, 40)}...
+</p>
 
       <p className='mt-3 text-lg font-medium text-purple-600'>{job.company?.name || 'Unknown Company'}</p>
 

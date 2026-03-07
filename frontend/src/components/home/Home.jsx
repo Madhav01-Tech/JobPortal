@@ -3,12 +3,10 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setSearchQuery as setSearchQueryAction } from "../../../redux/jobSlice.js";
-
 const Home = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
- 
   const [searchQuery, setSearchQuery] = useState("");
 
 
@@ -21,7 +19,7 @@ const Home = () => {
   
   const CateogaryHandler = (category) => {
     dispatch(setSearchQueryAction(category));
-    navigate("/browser");
+    navigate(`/browser/${category}`);
   };
 
   return (
@@ -76,7 +74,7 @@ const Home = () => {
         <button
           onClick={() => {
             if (searchQuery.trim()) {
-              navigate("/browser");
+              navigate(`/browser/${searchQuery}`);
             }
           }}
           className="bg-purple-600 hover:bg-purple-700 text-white p-3 rounded-full"

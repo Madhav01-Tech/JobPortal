@@ -1,9 +1,11 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-
+import { useSelector } from "react-redux";
 const Job = ({job}) => {
-  
+    const companies = useSelector(
+    (state) => state.company.companies
+  ) || [];
  if (!job) return null;
   const navigate = useNavigate();
   return (
