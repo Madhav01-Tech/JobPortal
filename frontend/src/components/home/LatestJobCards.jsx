@@ -7,7 +7,7 @@ const LatestJobCards = ({ job, onClick }) => {
     <div
       onClick={onClick}
       
-      className='p-5 rounded-xl shadow-xl hover:shadow-2xl border border-gray-300 transition cursor-pointer w-[350px]'
+      className='p-6 rounded-xl shadow-xl hover:shadow-2xl border border-gray-300 transition cursor-pointer w-[350px]'
     >
       <h3 className='text-2xl font-semibold'>{job.title}</h3>
       <p className="text-[14px] text-gray-600 leading-relaxed mt-2 font-normal tracking-wide">

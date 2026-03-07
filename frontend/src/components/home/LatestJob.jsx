@@ -40,12 +40,12 @@ const LatestJob = () => {
         <span className="text-purple-500 ml-20">Latest & Top</span> Job Openings
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-15 my-5 ml-30 max-w-5xl mx-auto  gap-y-2">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-15 my-5 ml-30 max-w-5xl mx-auto  gap-y-5">
         {!filteredJobs || filteredJobs.length === 0 ? (
           <span className="text-2xl font-bold">No Job Found</span>
         ) : (
           filteredJobs
-            .slice(0, 6)
+            .slice(0, 3)
             .map((job) => (
               <LatestJobCards
                 key={job._id}
